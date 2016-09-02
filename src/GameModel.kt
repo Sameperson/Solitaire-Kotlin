@@ -8,4 +8,12 @@ class GameModel {
             FoundationPile(spades)
     )
     val tableOfPiles = Array(7, { TableauPile() })
+
+    fun resetGame() {
+        wastePile.clear()
+        foundationPiles.forEach {
+            it.reset()
+        }
+    }
 }
+
