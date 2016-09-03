@@ -7,12 +7,18 @@ class GameModel {
             FoundationPile(hearts),
             FoundationPile(spades)
     )
-    val tableOfPiles = Array(7, { TableauPile() })
+    val tableaufPiles = Array(7, { TableauPile() })
 
     fun resetGame() {
         wastePile.clear()
         foundationPiles.forEach {
             it.reset()
+        }
+        deck.reset()
+
+        tableaufPiles.forEachIndexed { i, tableauPile ->
+            val cards: MutableList<Card> = Array(i + 1, { deck.drawCard() }).toMutableList()
+            tableaufPiles[i] = TableauPile(cards)
         }
     }
 }
