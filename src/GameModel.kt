@@ -1,4 +1,4 @@
-class GameModel {
+object GameModel {
     val deck = Deck()
     val foundationPile: MutableList<Card> = mutableListOf();
     val foundationPiles = arrayOf(
