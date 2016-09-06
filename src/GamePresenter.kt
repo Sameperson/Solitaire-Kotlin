@@ -8,7 +8,23 @@ class GamePresenter {
 
     fun onDeckTap() {
         GameModel.onDeckTap()
-        view?.update(GameModel)
+        view?.update()
+    }
+
+    fun onWastePileTap() {
+        GameModel.onWastePileTap()
+        view?.update()
+    }
+
+    fun onFoundationTap(index: Int) {
+        GameModel.onFoundationTap(index)
+        view?.update()
+    }
+
+    fun onTableauPileTap(tablIndex: Int, cardIndex: Int) {
+        GameModel.onTableauPileTap(tablIndex, cardIndex)
+        view?.update()
+
     }
 
 }

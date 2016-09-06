@@ -1,6 +1,6 @@
 object GameModel {
     val deck = Deck()
-    val foundationPile: MutableList<Card> = mutableListOf();
+    val wastePile: MutableList<Card> = mutableListOf();
     val foundationPiles = arrayOf(
             FoundationPile(clubs),
             FoundationPile(diamonds),
@@ -10,7 +10,7 @@ object GameModel {
     val tableauPiles = Array(7, { TableauPile() })
 
     fun resetGame() {
-        foundationPile.clear()
+        wastePile.clear()
         foundationPiles.forEach {
             it.reset()
         }
@@ -26,19 +26,19 @@ object GameModel {
         if (deck.cardsInDeck.size > 0) {
             val card = deck.drawCard()
             card.faceUp = true
-            foundationPile.add(card)
+            wastePile.add(card)
         }
         else {
-            deck.cardsInDeck = foundationPile.toMutableList()
-            foundationPile.clear()
+            deck.cardsInDeck = wastePile.toMutableList()
+            wastePile.clear()
         }
     }
 
     fun onWastePileTap() {
-        if (foundationPile.size > 0) {
-            val card = foundationPile.last()
+        if (wastePile.size > 0) {
+            val card = wastePile.last()
             if (playCard(card)) {
-                foundationPile.remove(card)
+                wastePile.remove(card)
             }
         }
 
@@ -94,5 +94,25 @@ object GameModel {
         }
         return false
     }
+
+    fun debugPrint() {
+        var firstLine = if (wastePile.size > 0) "${wastePile.last()}" else "___"
+        firstLine = firstLine.padEnd(18)
+        foundationPiles.forEach{
+            firstLine += if (it.cards.size > 0) "${it.cards.last()}" else "___"
+            firstLine += "   "
+        }
+        println(firstLine)
+        println()
+        for(i in 0..12) {
+            var row = ""
+            tableauPiles.forEach{
+                row += if(it.cards.size > i) "${it.cards[i]}" else "   "
+                row += "   "
+            }
+            println(row)
+        }
+    }
+
 }
 
