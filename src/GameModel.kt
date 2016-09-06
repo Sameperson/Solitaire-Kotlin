@@ -55,17 +55,14 @@ object GameModel {
 
     }
 
-    fun onTableauPileTap(tablIndex: Int, cardIndex: Int) {
-        val pile = tableauPiles[tablIndex]
-        if (pile.cards.size > 0) {
-            val cards = pile.cards.subList(cardIndex, pile.cards.lastIndex + 1)
-            if(playCards(cards)) {
-                pile.removeCards(cardIndex)
+    fun onTableauPileTap(tableauIndex: Int, cardIndex: Int) {
+        val tableauPile = tableauPiles[tableauIndex]
+        if (tableauPile.cards.size > 0) {
+            val cards = tableauPile.cards.subList(cardIndex, tableauPile.cards.lastIndex + 1)
+            if (playCards(cards)) {
+                tableauPile.removeCards(cardIndex)
             }
-
         }
-        pile.cards[cardIndex]
-
     }
 
     private fun playCards(cards: MutableList<Card>): Boolean {
